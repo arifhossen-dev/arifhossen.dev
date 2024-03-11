@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ class HomeController extends Controller
 {
     public function home():Response
     {
-        return Inertia::render('Home');
+        $posts = Post::all();
+        return Inertia::render('Home',['posts' => $posts]);
     }
 }
