@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -17,12 +17,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = $this->faker->realText(200);
-        return [
+        $title = $this->faker->realText(40);
+        return array(
             'user_id' => 1,
             'title' => Str::title($title),
-            'slug' => Str::of($title)->slug('-'),
+            'slug' => Str::of($title)->slug('_'),
             'body' => $this->faker->realText(500),
-        ];
+        );
     }
 }
