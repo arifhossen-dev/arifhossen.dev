@@ -17,7 +17,7 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = $this->faker->realText(40);
+        $title = $this->faker->unique()->realText(40);
         return array(
             'user_id' => 1,
             'title' => Str::title($title),
