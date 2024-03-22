@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function home():Response
     {
-        $posts = PostResource::collection(Post::paginate());
+        $posts = PostResource::collection(Post::paginate(6));
         return Inertia::render('Home',['posts' => $posts]);
     }
 }
