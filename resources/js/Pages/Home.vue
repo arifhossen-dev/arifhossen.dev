@@ -6,7 +6,7 @@ const props = defineProps(['posts'])
 
 <template>
     <Head title="Welcome" />
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+    <div class="bg-blue-50 text-black/50 dark:bg-black dark:text-white/50">
         <img
             id="background"
             class="absolute -left-20 top-0 max-w-[877px]"
@@ -28,8 +28,6 @@ const props = defineProps(['posts'])
                             id="docs-card"
                             class="
                                 flex
-                                flex-col
-                                items-end
                                 gap-6
                                 overflow-hidden
                                 rounded-lg
@@ -44,15 +42,14 @@ const props = defineProps(['posts'])
                             "
                         >
                             <div class="w-full">
-                                <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                <div class="relative flex flex-col space-x-3 gap-3 rounded-lg border border-blue-100 bg-white shadow-sm">
                                     <div class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                        <img class="w-full rounded-tl-lg rounded-tr-lg" src="/images/Square_Arif_Hossen_Laravel_developer-02.jpeg" alt="">
                                     </div>
-                                    <div class="min-w-0 flex-1">
+                                    <div class="min-w-0 flex-1 mb-2">
                                         <a href="#" class="focus:outline-none">
-                                            <span class="absolute inset-0" aria-hidden="true"></span>
                                             <p class="text-3xl font-extrabold text-gray-900">Arif Hossen</p>
-                                            <p class="truncate text-sm text-gray-500">Laravel | PHP | Vue | JavaScript</p>
+                                            <p class="font-extrabold text-gray-500">Laravel <span class="text-gray-300 text-xl">/</span> PHP <span class="text-gray-300 text-xl">/</span> Vue <span class="text-gray-300 text-xl">/</span> Alpine <span class="text-gray-300 text-xl">/</span> Livewire <span class="text-gray-300 text-xl">/</span> Filament</p>
                                         </a>
                                     </div>
                                 </div>
@@ -60,24 +57,31 @@ const props = defineProps(['posts'])
 
                             <nav class="flex flex-col items-end">
                                 <Link
-                                    href=""
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    :href="route('home')"
+                                    class="rounded-md px-3 py-2 text-black dark:text-white dark:hover:text-white/80"
+                                    :class="true?'bg-blue-100':'bg-white hover:bg-blue-50'"
                                 >
-                                    Dashboard
+                                    Home
+                                </Link>
+                                <Link
+                                    href=""
+                                    class="rounded-md hover:bg-blue-50 px-3 py-2 text-black dark:text-white dark:hover:text-white/80"
+                                >
+                                    Portfolio
                                 </Link>
 
                                 <Link
                                     href=""
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    class="rounded-md px-3 py-2 text-black dark:text-white dark:hover:text-white/80"
                                 >
-                                    Log in
+                                    About
                                 </Link>
 
                                 <Link
                                     href=""
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    class="rounded-md px-3 py-2 text-black dark:text-white dark:hover:text-white/80"
                                 >
-                                    Register
+                                    Search
                                 </Link>
                             </nav>
                         </div>
@@ -86,10 +90,12 @@ const props = defineProps(['posts'])
                         <template v-for="post in posts.data">
 
                         <a
-                            href=""
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            :href="route('post.show', post)"
+                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            :class="post.id === 1?'md:row-span-2':''"
                         >
                             <div
+                                v-if="post.id == 1"
                                 class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
                             >
                                 <svg
@@ -106,11 +112,11 @@ const props = defineProps(['posts'])
                                 </svg>
                             </div>
 
-                            <div class="pt-3 sm:pt-5">
+                            <div class="">
                                 <h2 class="text-xl font-semibold text-black dark:text-white">{{post.title}}</h2>
 
                                 <p class="mt-4 text-sm/relaxed">
-                                    {{post.short_body}}
+                                    {{post.body??post.short_body}}
                                 </p>
                             </div>
                         </a>
