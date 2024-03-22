@@ -14,4 +14,9 @@ class HomeController extends Controller
         $posts = PostResource::collection(Post::paginate(6));
         return Inertia::render('Home',['posts' => $posts]);
     }
+
+    public function show(Post $post)
+    {
+        return Inertia::render('Posts/Show',['post'=>$post]);
+    }
 }
