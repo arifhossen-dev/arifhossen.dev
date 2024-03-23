@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class,'home'])->name('home');
-Route::get('/posts/{post}', [HomeController::class,'show'])->name('post.show');
+Route::get('/posts/{post}', [HomeController::class,'show'])->name('posts.show');
 
 Route::middleware(['auth','verified'])
     ->prefix('molla')
+    ->name('molla.')
     ->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
