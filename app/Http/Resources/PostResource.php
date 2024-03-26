@@ -20,7 +20,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'body' => $this->body,
+            'body' => $this->when(!$request->routeIs('posts.index')&&$this->id===1,$this->body),
             'short_body' => $shortBody,
             'updated_at' => $this->updated_at,
         ];
