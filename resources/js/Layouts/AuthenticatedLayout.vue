@@ -10,7 +10,7 @@ import SideNav from "@/Components/SideNav.vue";
             <div class="flex bg-blue-50">
                 <SideNav/>
 
-                <div class="w-full">
+                <div class="w-full ml-[250px]">
                     <nav class="bg-white border-b border-gray-100">
                         <!-- Primary Navigation Menu -->
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,7 +65,7 @@ import SideNav from "@/Components/SideNav.vue";
                         </div>
                     </header>
                     <!-- Page Content -->
-                    <main>
+                    <main class="w-full py-5">
                         <slot />
                     </main>
                 </div>

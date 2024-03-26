@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -15,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::all());
+        $posts = PostResource::collection(Post::paginate());
+        return Inertia::render('Admin/Posts/Index',['posts'=>$posts]);
     }
 
     /**

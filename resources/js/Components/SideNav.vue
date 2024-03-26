@@ -4,6 +4,7 @@ import { ChevronRightIcon } from '@heroicons/vue/20/solid'
 import {
     CalendarIcon,
     ChartPieIcon,
+    DocumentCheckIcon,
     DocumentDuplicateIcon,
     FolderIcon,
     HomeIcon,
@@ -14,6 +15,16 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 const navigation = [
     { name: 'Dashboard', href: `${route('molla.dashboard')}`, icon: HomeIcon, current: true },
+    {
+        name: 'Posts',
+        href: `${route('molla.posts.index')}`,
+        icon: DocumentCheckIcon,
+        current: true,
+        children: [
+            { name: 'List', href: `${route('molla.posts.index')}` },
+            { name: 'Create', href: `${route('molla.posts.create')}` },
+        ],
+    },
     {
         name: 'Teams',
         icon: UsersIcon,
@@ -41,47 +52,49 @@ const navigation = [
 ]
 </script>
 <template>
-    <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 md:h-screen w-[300px]">
-        <div class="flex h-16 shrink-0 items-center">
-            <Link :href="route('molla.dashboard')">
-                <ApplicationLogo
-                    class="block h-9 w-auto fill-current text-gray-800"
-                />
-            </Link>
-        </div>
-        <nav class="flex flex-1 flex-col">
-            <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                <li>
-                    <ul role="list" class="-mx-2 space-y-1">
-                        <li v-for="item in navigation" :key="item.name">
-                            <Link v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-700']">
-                                <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
-                                {{ item.name }}
-                            </Link>
-                            <Disclosure as="div" v-else v-slot="{ open }">
-                                <DisclosureButton :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 font-semibold text-gray-700']">
+    <div class="fixed top-0 left-0 bottom-0">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 md:h-screen w-[250px]">
+            <div class="flex h-16 shrink-0 items-center">
+                <Link :href="route('molla.dashboard')">
+                    <ApplicationLogo
+                        class="block h-9 w-auto fill-current text-gray-800"
+                    />
+                </Link>
+            </div>
+            <nav class="flex flex-1 flex-col">
+                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                        <ul role="list" class="-mx-2 space-y-1">
+                            <li v-for="item in navigation" :key="item.name">
+                                <Link v-if="!item.children" :href="item.href" :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-700']">
                                     <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
                                     {{ item.name }}
-                                    <ChevronRightIcon :class="[open ? 'rotate-90 text-gray-500' : 'text-gray-400', 'ml-auto h-5 w-5 shrink-0']" aria-hidden="true" />
-                                </DisclosureButton>
-                                <DisclosurePanel as="ul" class="mt-1 px-2">
-                                    <li v-for="subItem in item.children" :key="subItem.name">
-                                        <!-- 44px -->
-                                        <DisclosureButton as="a" :href="subItem.href" :class="[subItem.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'block rounded-md py-2 pr-2 pl-9 text-sm leading-6 text-gray-700']">{{ subItem.name }}</DisclosureButton>
-                                    </li>
-                                </DisclosurePanel>
-                            </Disclosure>
-                        </li>
-                    </ul>
-                </li>
-                <li class="-mx-6 mt-auto">
-                    <Link :href="route('profile.edit')" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
-                        <img class="h-8 w-8 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                        <span class="sr-only">Your profile</span>
-                        <span aria-hidden="true">{{ $page.props.auth.user.name }}</span>
-                    </Link>
-                </li>
-            </ul>
-        </nav>
+                                </Link>
+                                <Disclosure as="div" v-else v-slot="{ open }">
+                                    <DisclosureButton :class="[item.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 font-semibold text-gray-700']">
+                                        <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
+                                        {{ item.name }}
+                                        <ChevronRightIcon :class="[open ? 'rotate-90 text-gray-500' : 'text-gray-400', 'ml-auto h-5 w-5 shrink-0']" aria-hidden="true" />
+                                    </DisclosureButton>
+                                    <DisclosurePanel as="ul" class="mt-1 px-2">
+                                        <li v-for="subItem in item.children" :key="subItem.name">
+                                            <!-- 44px -->
+                                            <DisclosureButton as="a" :href="subItem.href" :class="[subItem.current ? 'bg-gray-50' : 'hover:bg-gray-50', 'block rounded-md py-2 pr-2 pl-9 text-sm leading-6 text-gray-700']">{{ subItem.name }}</DisclosureButton>
+                                        </li>
+                                    </DisclosurePanel>
+                                </Disclosure>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="-mx-6 mt-auto">
+                        <Link :href="route('profile.edit')" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                            <span class="sr-only">Your profile</span>
+                            <span aria-hidden="true">{{ $page.props.auth.user.name }}</span>
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </template>
