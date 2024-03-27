@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class,'home'])->name('home');
+Route::get('/about', [HomeController::class,'about'])->name('about');
+Route::get('/portfolio', [HomeController::class,'portfolio'])->name('portfolio');
 Route::get('/posts/{post}', [HomeController::class,'show'])->name('posts.show');
 
 Route::middleware(['auth','verified'])

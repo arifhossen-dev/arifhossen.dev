@@ -1,26 +1,20 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import Pagination from "@/Components/Pagination.vue";
 import ProfileCard from "@/Components/ProfileCard.vue";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
+import Pagination from "@/Components/Pagination.vue";
 const props = defineProps(['posts'])
 </script>
 
 <template>
     <Head title="Welcome" />
-
     <LandingLayout>
         <ProfileCard/>
 
-        <template v-for="post in posts.data">
-
-            <a
-                :href="route('posts.show', post)"
+            <div
                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                :class="post.id === 1?'md:row-span-2':''"
             >
                 <div
-                    v-if="post.id == 1"
                     class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
                 >
                     <svg
@@ -38,20 +32,12 @@ const props = defineProps(['posts'])
                 </div>
 
                 <div class="">
-                    <h2 class="text-xl font-semibold text-black dark:text-white">{{post.title}}</h2>
+                    <h2 class="text-xl font-semibold text-black dark:text-white">Project title</h2>
 
                     <p class="mt-4 text-sm/relaxed">
-                        {{post.body??post.short_body}}
+                        Lorem
                     </p>
                 </div>
-            </a>
-
-        </template>
-
-        <div class="col-span-2">
-            <div>
-                <Pagination :meta="posts.meta"/>
             </div>
-        </div>
     </LandingLayout>
 </template>

@@ -15,6 +15,16 @@ class HomeController extends Controller
         return Inertia::render('Home',['posts' => $posts]);
     }
 
+    public function about()
+    {
+        return Inertia::render('About');
+    }
+
+    public function portfolio()
+    {
+        return Inertia::render('Portfolio');
+    }
+
     public function show(Post $post)
     {
         return Inertia::render('Posts/Show',['post'=>$post]);
