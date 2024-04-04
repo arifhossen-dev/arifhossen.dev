@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -25,15 +24,26 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Posts/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+           'title' => ['required','string','min:10','max:255'],
+           'slug' => ['required','string','min:10','max:255'],
+           'body' => ['required','string','min:100', 'max:10000'],
+        ]);
+
+        $post = Post::create([
+                ...$data,
+                'user_id' => auth()->user()->id
+            ]);
+
+        return to_route('molla.posts.edit', $post);
     }
 
     /**
@@ -49,13 +59,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return Inertia::render('Admin/Posts/Edit',['post'=>$post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         //
     }
