@@ -21,6 +21,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->when(!$request->routeIs('posts.index')&&$this->id===1,$this->body),
+            'html' => $this->html,
             'short_body' => $shortBody,
             'updated_at' => $this->updated_at,
         ];
