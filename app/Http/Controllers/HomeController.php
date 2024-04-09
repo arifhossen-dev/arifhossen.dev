@@ -27,6 +27,6 @@ class HomeController extends Controller
 
     public function show(Post $post)
     {
-        return Inertia::render('Posts/Show',['post'=>$post]);
+        return Inertia::render('Posts/Show',['post'=>PostResource::make($post)]);
     }
 }

@@ -28,11 +28,9 @@ defineProps(['post'])
             </div>
 
             <div class="pt-3 sm:pt-5">
-                <h2 class="text-xl font-semibold text-black dark:text-white">{{post.title}}</h2>
-
-                <p class="mt-4 text-sm/relaxed">
-                    {{post.body}}
-                </p>
+                <h2 class="text-xl font-semibold text-black dark:text-white">{{post.data.title}}</h2>
+<!--                <article class="prose prose-sm max-w-none" v-html="post.data.html"></article>-->
+                <article class="" v-html="post.data.html"></article>
             </div>
         </div>
     </div>
