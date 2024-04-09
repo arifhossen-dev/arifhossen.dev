@@ -8,6 +8,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
+import MarkdownEditor from "@/Components/MarkdownEditor.vue";
 
 const form = useForm({
     title:'',
@@ -65,6 +66,7 @@ const createPost = () => form.post(route('molla.posts.store'));
                 </div>
                 <div>
                     <InputLabel for="body" value="Body" />
+                    <MarkdownEditor v-model="form.body"/>
                     <TextArea
                         id="body"
                         v-model="form.body"
