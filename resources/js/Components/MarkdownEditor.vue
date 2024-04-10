@@ -8,6 +8,9 @@ import 'remixicon/fonts/remixicon.css';
 import {Underline} from "@tiptap/extension-underline";
 import {Heading} from "@tiptap/extension-heading";
 import Link from '@tiptap/extension-link';
+import {Code} from "@tiptap/extension-code";
+import {Paragraph} from "@tiptap/extension-paragraph";
+import {Highlight} from "@tiptap/extension-highlight";
 
 const props = defineProps({
     modelValue:'',
@@ -24,6 +27,12 @@ const editor = useEditor({
             levels: [2, 3, 4],
         }),
         Link,
+        Code,
+        Document,
+        Paragraph,
+        Text,
+        Code,
+        Highlight.configure({ multicolor: true }),
     ],
     editorProps: {
         attributes: {
@@ -171,6 +180,28 @@ watch(()=>props.modelValue,(value)=>{
                     :class="{ 'bg-gray-200': editor?.isActive('link') }"
                 >
                     <i class="ri-link"></i>
+                </button>
+            </li>
+            <li>
+                <button
+                    @click="()=>editor.chain().focus().toggleCode().run()"
+                    title="Code"
+                    type="button"
+                    class="hover:bg-gray-200 px-2 py-1"
+                    :class="{ 'bg-gray-200': editor?.isActive('code') }"
+                >
+                    <i class="ri-code-block"></i>
+                </button>
+            </li>
+            <li>
+                <button
+                    @click="()=>editor.chain().focus().toggleHighlight({ color: '#ffc078' }).run()"
+                    title="Highlight"
+                    type="button"
+                    class="hover:bg-gray-200 px-2 py-1"
+                    :class="{ 'bg-gray-200': editor?.isActive('highlight', { color: '#ffc078' }) }"
+                >
+                    <i class="ri-font-color"></i>
                 </button>
             </li>
         </ul>
