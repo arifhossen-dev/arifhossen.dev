@@ -21,8 +21,11 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.19",
         "@heroicons/vue": "^2.1.1",
+        "@tiptap/extension-code": "^2.3.0",
         "@tiptap/extension-heading": "^2.2.6",
+        "@tiptap/extension-highlight": "^2.3.0",
         "@tiptap/extension-link": "^2.2.6",
+        "@tiptap/extension-paragraph": "^2.3.0",
         "@tiptap/extension-underline": "^2.2.5",
         "@tiptap/pm": "^2.2.4",
         "@tiptap/starter-kit": "^2.2.4",
